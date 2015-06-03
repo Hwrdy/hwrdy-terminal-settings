@@ -63,13 +63,3 @@ List all plugins `:PluginList`
 Update plugins `PluginUpdate`  
 Search plugins `PluginSearch [plugin name]`  
 Clean unused plugins `PluginClean`  
-
-
-
-
-## Reference
-
-http://blog.taian.su/2013-06-06-custom-your-cli-on-osx/  
-http://blog.longwin.com.tw/2009/03/choose-vim-color-scheme-2009/  
-http://ibpf.github.io/blog/2015/04/17/mac-vim-xiu-lian-ji-vundle/  
-
