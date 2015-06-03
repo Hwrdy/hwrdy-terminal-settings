@@ -24,6 +24,35 @@ edit `~/.zshrc` and set `ZSH_THEME="candy"`
    
 zsh theme preview: http://zshthem.es/all/
 
+# Vim
+
+vim theme preview: http://vimcolorschemetest.googlecode.com/svn/html/index-html.html
+
+install vundle
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+```
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
+" Put your non-Plugin stuff after this line
+```
+
 
 
 ## Reference
