@@ -12,7 +12,7 @@ Get the iTerm color settings
     
 Apply them in iTerm through iTerm -> preferences -> profiles -> colors -> load presets -> import. You can create a different profile, other than Default if you wish to do so.
 
-Then open the itermcolors file, click load presets again and load the "Solarized Dark".
+Then open the itermcolors file, click load presets again and load the "Smyck-Color".
 
 # Oh my zsh 
 
