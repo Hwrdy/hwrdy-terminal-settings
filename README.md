@@ -29,7 +29,7 @@ zsh theme preview: http://zshthem.es/all/
 vim theme preview: http://vimcolorschemetest.googlecode.com/svn/html/index-html.html
 
 install vundle
-    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    ```git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim```
 
 ```
 set nocompatible              " be iMproved, required
@@ -57,5 +57,7 @@ filetype plugin indent on    " required
 
 ## Reference
 
-http://blog.taian.su/2013-06-06-custom-your-cli-on-osx/
-http://blog.longwin.com.tw/2009/03/choose-vim-color-scheme-2009/
+http://blog.taian.su/2013-06-06-custom-your-cli-on-osx/  
+http://blog.longwin.com.tw/2009/03/choose-vim-color-scheme-2009/  
+http://ibpf.github.io/blog/2015/04/17/mac-vim-xiu-lian-ji-vundle/  
+
