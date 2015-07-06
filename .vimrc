@@ -1,42 +1,51 @@
 " Wohey's vimrc
-" Howard Yeh <howard.chyeh at gmail dot com>
 
+" no vi-compatible
+set nocompatible
 
-set nocompatible    " not compatible with the old-fashion vi mode
 filetype off
 
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle, required
+" let Vundle manage Vundle
 Plugin 'gmarik/vundle'
 
 " Vim
 Plugin 'bling/vim-airline'
+Plugin 'fisadev/fisa-vim-colorscheme' " Terminal Vim with 256 colors colorscheme
 
 " Tool
-Plugin 'vim-scripts/Align'  " alignment tool
+Plugin 'vim-scripts/Align'            " alignment tool
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic' " syntax checkig
+Plugin 'scrooloose/syntastic'         " syntax checkig
 Plugin 'kien/ctrlp.vim'
+Plugin 'fisadev/vim-ctrlp-cmdpalette' " extension to ctrlp, for fuzzy command finder
 Plugin 'terryma/vim-expand-region'
-Plugin 't9md/vim-smalls'  " cursor movement
+Plugin 't9md/vim-smalls'              " cursor movement
 Plugin 'int3/vim-taglist-plus'
+Plugin 'kien/tabman.vim'              " tablist panel , leader mt/mf
+Plugin 'fisadev/FixedTaskList.vim'    " Task list  :TaskList
+Plugin 'Townk/vim-autoclose'          " Auto close
+Plugin 't9md/vim-choosewin'           " Windows chooser, -
+Plugin 'c9s/colorselector.vim'        " :SelectColorS
 
 " syntax helper
-Plugin 'mattn/emmet-vim'  " abbreviation tool
+Plugin 'mattn/emmet-vim'              " abbreviation tool
 Plugin 'othree/html5.vim'
 Plugin 'othree/xml.vim'
-Plugin 'nginx.vim'    " highlights configuration files for nginx
+Plugin 'nginx.vim'                    " highlights configuration files for nginx
 
 " Complte
 Plugin 'marijnh/tern_for_vim'
 Plugin 'othree/tern_for_vim_coffee'
 Plugin 'L9'
 Plugin 'othree/vim-autocomplpop'
+Plugin 'Valloric/YouCompleteMe'
+
+
 
 Plugin 'MarcWeber/vim-addon-mw-utils.git'
 Plugin 'MarcWeber/vim-addon-local-vimrc'
@@ -55,15 +64,15 @@ Plugin 'cakebaker/scss-syntax.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()               " required
 filetype plugin indent on       " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+
+
 
 syntax on
 filetype on                 " Enable filetype detection
 filetype indent on          " Enable filetype-specific indenting
 filetype plugin on          " Enable filetype-specific plugins
 
-colorscheme gentooish
+colorscheme wombat256mod
 
 set nocompatible
 set display+=lastline
@@ -86,17 +95,17 @@ set expandtab
 set softtabstop=2
 set shiftwidth=2
 
-set hlsearch        " search highlighting
-set incsearch       " incremental search
-set showmatch       " Cursor shows matching ) and }
-set showmode        " Show current mode
-set autoindent        " auto indentation
+set hlsearch                " search highlighting
+set incsearch               " incremental search
+set showmatch               " Cursor shows matching ) and }
+set showmode                " Show current mode
+set autoindent              " auto indentation
 set smartindent
 set cindent
-set nobackup        " no *~ backup files
-set ignorecase        " ignore case when searching
-set smartcase       " ignore case if search pattern is all lowercase,case-sensitive otherwise
-set smarttab        " insert tabs on the start of a line according to context
+set nobackup                " no *~ backup files
+set ignorecase              " ignore case when searching
+set smartcase               " ignore case if search pattern is all lowercase,case-sensitive otherwise
+set smarttab                " insert tabs on the start of a line according to context
 set foldmethod=syntax
 set backspace=indent,eol,start whichwrap+=<,>,[,]
 set hidden
@@ -124,14 +133,36 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
-set pastetoggle=<F12>
 
-" Set cursor line.
-set cursorline
-set cursorcolumn
-highlight CursorLine cterm=none ctermbg=236
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-highlight CursorColumn cterm=none ctermbg=236
+" Set cursor line , Highlight current line
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
+
+" Window Chooser ------------------------------
+
+" mapping
+nmap  -  <Plug>(choosewin)
+" show big letters
+let g:choosewin_overlay_enable = 1
+
+" Airline ------------------------------
+
+let g:airline_powerline_fonts = 0
+let g:airline_theme = 'bubblegum'
+let g:airline#extensions#whitespace#enabled = 0
+
+" TabMan ------------------------------
+
+" mappings to toggle display, and to focus on it
+let g:tabman_toggle = 'tl'
+let g:tabman_focus  = 'tf'
+
+" Autoclose ------------------------------
+
+" Fix to let ESC work as espected with Autoclose plugin
+let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
+
 
 "" keypad
 "" http://vim.wikia.com/wiki/PuTTY_numeric_keypad_mappings
@@ -157,9 +188,17 @@ nnoremap <silent> <F2> :NERDTree<CR>
 let NERDTreeShowBookmarks  = 0
 let g:nerdtree_tabs_focus_on_files = 1
 
-
 "Taglist
-nnoremap <silent> <F3> :TlistToggle<CR>
+nnoremap <silent> <F3> :TlistOpen<CR>
+
+
+" Tasklist ------------------------------
+" show pending tasks list
+nnoremap <F5> :TaskList<CR>
+
+" Set Paste mode
+nnoremap <silent> <F12> :set paste<CR>
+nnoremap <Leader><F12> :set nopaste<CR>
 
 " Activate scss.vim
 au BufRead,BufNewFile *.scss set filetype=scss
@@ -172,8 +211,6 @@ autocmd BufReadPost *
 \ if line("'\"") > 0 && line ("'\"") <= line("$") |
 \   exe "normal g'\"" |
 \ endif
-" " Make vim setting works immediately.
-autocmd! BufWritePost .vimrc source %
 
 
 " Special File Types
@@ -197,8 +234,9 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 nmap <Leader><Leader> V
-"
-" "III. Use region expanding
+
+
+"III. Use region expanding
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
@@ -223,13 +261,13 @@ function! Replace(confirm, wholeword, replace)
   execute 'argdo %s/' . search . '/' . replace . '/' . flag . '| update'
 endfunction
 
-" 不确认、非整词
+" without confirm, incomplete
 nnoremap <Leader>R :call Replace(0, 0, input('Replace '.expand('<cword>').' with: '))<CR>
-" 不确认、整词
+" without confirm, complete
 nnoremap <Leader>rw :call Replace(0, 1, input('Replace '.expand('<cword>').' with: '))<CR>
-" 确认、非整词
+" confirm, incomplete
 nnoremap <Leader>rc :call Replace(1, 0, input('Replace '.expand('<cword>').' with: '))<CR>
-" 确认、整词
+" confirm, complete
 nnoremap <Leader>rcw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
 nnoremap <Leader>rwc :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
 
