@@ -20,7 +20,7 @@ Plugin 'vim-scripts/Align'            " alignment tool
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'         " syntax checkig
+"Plugin 'scrooloose/syntastic'         " syntax checkig
 Plugin 'kien/ctrlp.vim'
 Plugin 'fisadev/vim-ctrlp-cmdpalette' " extension to ctrlp, for fuzzy command finder
 Plugin 'terryma/vim-expand-region'
@@ -31,6 +31,8 @@ Plugin 'fisadev/FixedTaskList.vim'    " Task list  :TaskList
 Plugin 'Townk/vim-autoclose'          " Auto close
 Plugin 't9md/vim-choosewin'           " Windows chooser, -
 Plugin 'c9s/colorselector.vim'        " :SelectColorS
+Plugin 'sjl/gundo.vim'                " undo list
+Plugin 'Yggdroot/indentLine'
 
 " syntax helper
 Plugin 'mattn/emmet-vim'              " abbreviation tool
@@ -40,11 +42,10 @@ Plugin 'nginx.vim'                    " highlights configuration files for nginx
 
 " Complte
 Plugin 'marijnh/tern_for_vim'
-Plugin 'othree/tern_for_vim_coffee'
+"Plugin 'othree/tern_for_vim_coffee'
 Plugin 'L9'
 Plugin 'othree/vim-autocomplpop'
-Plugin 'Valloric/YouCompleteMe'
-
+"Plugin 'Valloric/YouCompleteMe'
 
 
 Plugin 'MarcWeber/vim-addon-mw-utils.git'
@@ -53,12 +54,20 @@ Plugin 'tomtom/tlib_vim.git'
 Plugin 'honza/vim-snippets'
 Plugin 'garbas/vim-snipmate'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'justinj/vim-react-snippets'
+
+
 
 " Style
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'ap/vim-css-color'
 Plugin 'cakebaker/scss-syntax.vim'
+"Plugin 'juvenn/mustache.vim'
+"Plugin 'mustache/vim-mustache-handlebars'
 
+" Coffee
+"Plugin 'kchmck/vim-coffee-script'
+"Plugin 'othree/fecompressor.vim'
 
 
 " All of your Plugins must be added before the following line
@@ -90,7 +99,7 @@ set tabstop=2
 set modeline
 set modelines=2
 
-" Replace tab with 4 spaces.
+" Replace tab with 2 spaces.
 set expandtab
 set softtabstop=2
 set shiftwidth=2
@@ -106,7 +115,7 @@ set nobackup                " no *~ backup files
 set ignorecase              " ignore case when searching
 set smartcase               " ignore case if search pattern is all lowercase,case-sensitive otherwise
 set smarttab                " insert tabs on the start of a line according to context
-set foldmethod=syntax
+set foldmethod=marker
 set backspace=indent,eol,start whichwrap+=<,>,[,]
 set hidden
 set nobomb
@@ -134,34 +143,58 @@ set novisualbell
 set t_vb=
 set tm=500
 
+
+
 " Set cursor line , Highlight current line
 au WinLeave * set nocursorline nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
 
-" Window Chooser ------------------------------
 
+" Tern of vim -----------------------------
+let g:tern_show_argument_hints = 'on_hold'
+set completeopt-=preview
+
+
+" Window Chooser ------------------------------
 " mapping
-nmap  -  <Plug>(choosewin)
+nmap ``  <Plug>(choosewin)
 " show big letters
 let g:choosewin_overlay_enable = 1
 
-" Airline ------------------------------
 
+
+" Airline ------------------------------
 let g:airline_powerline_fonts = 0
 let g:airline_theme = 'bubblegum'
-let g:airline#extensions#whitespace#enabled = 0
+
+
 
 " TabMan ------------------------------
-
 " mappings to toggle display, and to focus on it
 let g:tabman_toggle = 'tl'
 let g:tabman_focus  = 'tf'
 
-" Autoclose ------------------------------
 
+
+" Autoclose ------------------------------
 " Fix to let ESC work as espected with Autoclose plugin
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
+
+
+
+" SnipMate --------------------------------
+au BufRead *.js set ft=javascript.html
+au BufNewFile *.js set ft=javascript.html
+
+au BufRead *.jsx set ft=javascript.html
+au BufNewFile *.jsx set ft=javascript.html
+
+au BufRead *.es6 set ft=javascript.html
+au BufNewFile *.es6 set ft=javascript.html
+
+"Indent Guide ----------------------------
+let g:indentLine_color_term = 239
 
 
 "" keypad
@@ -182,23 +215,38 @@ imap <Esc>OR *
 imap <Esc>Ol +
 imap <Esc>OS -
 
+
+
 " Set F1-F12 shortcut keys.
 " " NERDTree
 nnoremap <silent> <F2> :NERDTree<CR>
 let NERDTreeShowBookmarks  = 0
 let g:nerdtree_tabs_focus_on_files = 1
 
+
+
 "Taglist
 nnoremap <silent> <F3> :TlistOpen<CR>
+
 
 
 " Tasklist ------------------------------
 " show pending tasks list
 nnoremap <F5> :TaskList<CR>
 
+
+
+" Gundo --------
+nnoremap <F10> :GundoToggle<CR>
+
 " Set Paste mode
 nnoremap <silent> <F12> :set paste<CR>
-nnoremap <Leader><F12> :set nopaste<CR>
+nnoremap =<F12> :set nopaste<CR>
+
+
+" Coffee
+autocmd FileType coffee set ts=2 sw=2 sts=2
+
 
 " Activate scss.vim
 au BufRead,BufNewFile *.scss set filetype=scss
