@@ -16,29 +16,35 @@ Plugin 'bling/vim-airline'
 Plugin 'fisadev/fisa-vim-colorscheme' " Terminal Vim with 256 colors colorscheme
 
 " Tool
+Plugin 'christoomey/vim-run-interactive'
 Plugin 'vim-scripts/Align'            " alignment tool
+Plugin 'terryma/vim-multiple-cursors' " ctrl m,p,x
+Plugin 'junegunn/vim-easy-align'      " leader a
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'vim-scripts/matchit.zip'      " %
+Plugin 'scrooloose/nerdcommenter'     " ,cc ,cu ,space
 Plugin 'scrooloose/nerdtree'
-"Plugin 'scrooloose/syntastic'         " syntax checkig
+Plugin 'kshenoy/vim-signature'
 Plugin 'kien/ctrlp.vim'
 Plugin 'fisadev/vim-ctrlp-cmdpalette' " extension to ctrlp, for fuzzy command finder
-Plugin 'terryma/vim-expand-region'
-Plugin 't9md/vim-smalls'              " cursor movement
-Plugin 'int3/vim-taglist-plus'
+Plugin 'terryma/vim-expand-region'    " v,V
+"Plugin 't9md/vim-smalls'              " cursor movement
+Plugin 'majutsushi/tagbar'
 Plugin 'kien/tabman.vim'              " tablist panel , leader mt/mf
-Plugin 'fisadev/FixedTaskList.vim'    " Task list  :TaskList
 Plugin 'Townk/vim-autoclose'          " Auto close
 Plugin 't9md/vim-choosewin'           " Windows chooser, -
 Plugin 'c9s/colorselector.vim'        " :SelectColorS
 Plugin 'sjl/gundo.vim'                " undo list
 Plugin 'Yggdroot/indentLine'
+Plugin 'dyng/ctrlsf.vim'              " ctrl shift find
 
 " syntax helper
 Plugin 'mattn/emmet-vim'              " abbreviation tool
 Plugin 'othree/html5.vim'
 Plugin 'othree/xml.vim'
 Plugin 'nginx.vim'                    " highlights configuration files for nginx
+Plugin 'othree/yajs.vim',
+Plugin 'othree/es.next.syntax.vim'
 
 " Complte
 Plugin 'marijnh/tern_for_vim'
@@ -150,6 +156,8 @@ au WinLeave * set nocursorline nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
 
+" Remap ESC
+map! ;; <Esc> " map ;; to Esc "
 
 " Tern of vim -----------------------------
 let g:tern_show_argument_hints = 'on_hold'
@@ -168,6 +176,13 @@ let g:choosewin_overlay_enable = 1
 let g:airline_powerline_fonts = 0
 let g:airline_theme = 'bubblegum'
 
+" Multi Cursors -----------------------------
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 
 
 " TabMan ------------------------------
@@ -176,19 +191,49 @@ let g:tabman_toggle = 'tl'
 let g:tabman_focus  = 'tf'
 
 
+" Tagbar
+let g:tagbar_width=35
+let g:tagbar_autofocus=1
+nmap <F6> :TagbarToggle<CR>
+
+" CtrlSF ----------------------------------
+nmap     <Leader>ff <Plug>CtrlSFPrompt
+vmap     <Leader>ff <Plug>CtrlSFVwordPath
+vmap     <Leader>fF <Plug>CtrlSFVwordExec
+nmap     <Leader>fn <Plug>CtrlSFCwordPath
+nmap     <Leader>fp <Plug>CtrlSFPwordPath
+nnoremap <Leader>fo :CtrlSFOpen<CR>
+nnoremap <Leader>ft :CtrlSFToggle<CR>
+inoremap <Leader>ft <Esc>:CtrlSFToggle<CR>
+
+
+" Run Interactive
+nnoremap <leader>ri :RunInInteractiveShell<space>
+
 
 " Autoclose ------------------------------
 " Fix to let ESC work as espected with Autoclose plugin
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
 
+" EasyMotion ----------------------
+"let g:EasyMotion_leader_key = '.'
+let g:EasyMotion_smartcase = 1
+"let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+map <Leader><leader>h <Plug>(easymotion-linebackward)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+map <Leader><leader>l <Plug>(easymotion-lineforward)
+" repeat
+map <Leader><leader>. <Plug>(easymotion-repeat)
+
 
 " SnipMate --------------------------------
 au BufRead *.js set ft=javascript.html
 au BufNewFile *.js set ft=javascript.html
 
-au BufRead *.jsx set ft=javascript.html
-au BufNewFile *.jsx set ft=javascript.html
+" au BufRead *.jsx set ft=javascript.html
+" au BufNewFile *.jsx set ft=javascript.html
 
 au BufRead *.es6 set ft=javascript.html
 au BufNewFile *.es6 set ft=javascript.html
@@ -223,17 +268,8 @@ nnoremap <silent> <F2> :NERDTree<CR>
 let NERDTreeShowBookmarks  = 0
 let g:nerdtree_tabs_focus_on_files = 1
 
-
-
-"Taglist
-nnoremap <silent> <F3> :TlistOpen<CR>
-
-
-
-" Tasklist ------------------------------
-" show pending tasks list
-nnoremap <F5> :TaskList<CR>
-
+" NERD Commentor --------------------------
+let g:NERDSpaceDelims=1
 
 
 " Gundo --------
@@ -288,7 +324,6 @@ nmap <Leader><Leader> V
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-let g:EasyMotion_leader_key = ','
 
 
 function! Replace(confirm, wholeword, replace)
@@ -310,14 +345,13 @@ function! Replace(confirm, wholeword, replace)
 endfunction
 
 " without confirm, incomplete
-nnoremap <Leader>R :call Replace(0, 0, input('Replace '.expand('<cword>').' with: '))<CR>
+" nnoremap <Leader>R :call Replace(0, 0, input('Replace '.expand('<cword>').' with: '))<CR>
 " without confirm, complete
-nnoremap <Leader>rw :call Replace(0, 1, input('Replace '.expand('<cword>').' with: '))<CR>
+" nnoremap <Leader>rw :call Replace(0, 1, input('Replace '.expand('<cword>').' with: '))<CR>
 " confirm, incomplete
-nnoremap <Leader>rc :call Replace(1, 0, input('Replace '.expand('<cword>').' with: '))<CR>
+" nnoremap <Leader>rc :call Replace(1, 0, input('Replace '.expand('<cword>').' with: '))<CR>
 " confirm, complete
-nnoremap <Leader>rcw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
-nnoremap <Leader>rwc :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
+nnoremap <Leader>rw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
 
 
 
