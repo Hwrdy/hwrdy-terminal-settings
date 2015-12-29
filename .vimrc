@@ -1,4 +1,4 @@
-" Wohey's vimrc
+" Hwrdy's vimrc
 
 " no vi-compatible
 set nocompatible
@@ -28,7 +28,6 @@ Plugin 'kshenoy/vim-signature'
 Plugin 'kien/ctrlp.vim'
 Plugin 'fisadev/vim-ctrlp-cmdpalette' " extension to ctrlp, for fuzzy command finder
 Plugin 'terryma/vim-expand-region'    " v,V
-"Plugin 't9md/vim-smalls'              " cursor movement
 Plugin 'majutsushi/tagbar'
 Plugin 'kien/tabman.vim'              " tablist panel , leader mt/mf
 Plugin 'Townk/vim-autoclose'          " Auto close
@@ -68,6 +67,7 @@ Plugin 'justinj/vim-react-snippets'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'ap/vim-css-color'
 Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'othree/csscomplete.vim'
 "Plugin 'juvenn/mustache.vim'
 "Plugin 'mustache/vim-mustache-handlebars'
 
@@ -283,6 +283,8 @@ nnoremap =<F12> :set nopaste<CR>
 " Coffee
 autocmd FileType coffee set ts=2 sw=2 sts=2
 
+" CSS complete
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
 
 " Activate scss.vim
 au BufRead,BufNewFile *.scss set filetype=scss
@@ -301,7 +303,7 @@ autocmd BufReadPost *
 au BufRead,BufNewFile *.less set ft=less
 au BufRead,BufNewFile *.tpl set ft=html
 au BufRead,BufNewFile *.xsl set ft=html
-au BufRead,BufNewFile *.json set syntax=json
+au BufRead,BufNewFile *.json set ft=javascript
 au BufRead,BufNewFile *.hbs set syntax=handlebars
 au BufRead,BufNewFile *.n3  set ft=n3
 au BufRead,BufNewFile /usr/local/etc/nginx/* set ft=nginx
