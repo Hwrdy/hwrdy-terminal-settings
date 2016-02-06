@@ -16,9 +16,8 @@ Plugin 'bling/vim-airline'
 Plugin 'fisadev/fisa-vim-colorscheme' " Terminal Vim with 256 colors colorscheme
 
 " Tool
-Plugin 'christoomey/vim-run-interactive'
-Plugin 'vim-scripts/Align'            " alignment tool
-Plugin 'terryma/vim-multiple-cursors' " ctrl m,p,x
+" Plugin 'vim-scripts/Align'            " alignment tool
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'junegunn/vim-easy-align'      " leader a
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/matchit.zip'      " %
@@ -175,14 +174,38 @@ let g:choosewin_overlay_enable = 1
 " Airline ------------------------------
 let g:airline_powerline_fonts = 0
 let g:airline_theme = 'bubblegum'
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 
-" Multi Cursors -----------------------------
+
+" Easy Align -------------------------------
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+
+" Multiple Cursors -----------------------------
 let g:multi_cursor_use_default_mapping=0
-" Default mapping
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+
+
+" EasyMotion ----------------------
+let g:EasyMotion_smartcase = 1
+" left, up, bottom, right
+map <Leader><leader>h <Plug>(easymotion-linebackward)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+map <Leader><leader>l <Plug>(easymotion-lineforward)
+" repeat
+map <Leader><leader>. <Plug>(easymotion-repeat)
+
+
+" NERD Commentor --------------------------
+let g:NERDSpaceDelims=1
 
 
 " TabMan ------------------------------
@@ -215,17 +238,6 @@ nnoremap <leader>ri :RunInInteractiveShell<space>
 " Fix to let ESC work as espected with Autoclose plugin
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
-
-" EasyMotion ----------------------
-"let g:EasyMotion_leader_key = '.'
-let g:EasyMotion_smartcase = 1
-"let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-map <Leader><leader>h <Plug>(easymotion-linebackward)
-map <Leader><Leader>j <Plug>(easymotion-j)
-map <Leader><Leader>k <Plug>(easymotion-k)
-map <Leader><leader>l <Plug>(easymotion-lineforward)
-" repeat
-map <Leader><leader>. <Plug>(easymotion-repeat)
 
 
 " SnipMate --------------------------------
@@ -267,10 +279,6 @@ imap <Esc>OS -
 nnoremap <silent> <F2> :NERDTree<CR>
 let NERDTreeShowBookmarks  = 0
 let g:nerdtree_tabs_focus_on_files = 1
-
-" NERD Commentor --------------------------
-let g:NERDSpaceDelims=1
-
 
 " Gundo --------
 nnoremap <F10> :GundoToggle<CR>
@@ -347,7 +355,7 @@ function! Replace(confirm, wholeword, replace)
 endfunction
 
 " without confirm, incomplete
-" nnoremap <Leader>R :call Replace(0, 0, input('Replace '.expand('<cword>').' with: '))<CR>
+nnoremap <Leader>R :call Replace(0, 0, input('Replace '.expand('<cword>').' with: '))<CR>
 " without confirm, complete
 " nnoremap <Leader>rw :call Replace(0, 1, input('Replace '.expand('<cword>').' with: '))<CR>
 " confirm, incomplete
