@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/Wohey/.oh-my-zsh
+export ZSH=/Users/hwrdy/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -79,10 +79,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export NVM_DIR="/Users/Wohey/.nvm"
+export NVM_DIR="/Users/hwrdy/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 nvm alias default stable
 nvm use default
 
 
 export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+
+export PATH=${PATH}:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools
