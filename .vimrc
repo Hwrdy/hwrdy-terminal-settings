@@ -5,74 +5,69 @@ set nocompatible
 
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " let Vundle manage Vundle
 Plugin 'gmarik/vundle'
 
-" Vim
+" Vim environment
 Plugin 'bling/vim-airline'
 Plugin 'fisadev/fisa-vim-colorscheme' " Terminal Vim with 256 colors colorscheme
 
 " Tool
-" Plugin 'vim-scripts/Align'            " alignment tool
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'junegunn/vim-easy-align'      " leader a
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'vim-scripts/matchit.zip'      " %
-Plugin 'scrooloose/nerdcommenter'     " ,cc ,cu ,space
-Plugin 'scrooloose/nerdtree'
-Plugin 'kshenoy/vim-signature'
-Plugin 'kien/ctrlp.vim'
-Plugin 'fisadev/vim-ctrlp-cmdpalette' " extension to ctrlp, for fuzzy command finder
+"Plugin 'terryma/vim-multiple-cursors' " <C-n>
+Plugin 'junegunn/vim-easy-align'      " gaip, vipga
+Plugin 'Lokaltog/vim-easymotion'      " ,, hjkl
+Plugin 'vim-scripts/matchit.zip'      " % jump to corresponding ] }
+Plugin 'scrooloose/nerdcommenter'     " ,cc ,cm ,cu ,space
+Plugin 'scrooloose/nerdtree'          " F10
+"Plugin 'kshenoy/vim-signature'        " m[a-z]:mark, '[z-z]:jump
+Plugin 'kien/ctrlp.vim'               " <C-p>
+Plugin 'fisadev/vim-ctrlp-cmdpalette'
 Plugin 'terryma/vim-expand-region'    " v,V
-Plugin 'majutsushi/tagbar'
-Plugin 'kien/tabman.vim'              " tablist panel , leader mt/mf
+"Plugin 'kien/tabman.vim'              " tablist panel , leader mt/mf
 Plugin 'Townk/vim-autoclose'          " Auto close
-Plugin 't9md/vim-choosewin'           " Windows chooser, -
-Plugin 'c9s/colorselector.vim'        " :SelectColorS
-Plugin 'sjl/gundo.vim'                " undo list
-Plugin 'Yggdroot/indentLine'
-Plugin 'dyng/ctrlsf.vim'              " ctrl shift find
+Plugin 't9md/vim-choosewin'           " Windows chooser, ``
+Plugin 'sjl/gundo.vim'                " undo list  F10
+"Plugin 'dyng/ctrlsf.vim'              " ctrl shift find
+"Plugin 'mattn/emmet-vim'              " <C-z>,
 
 " syntax helper
-Plugin 'mattn/emmet-vim'              " abbreviation tool
-Plugin 'othree/html5.vim'
-Plugin 'othree/xml.vim'
-Plugin 'nginx.vim'                    " highlights configuration files for nginx
+"Plugin 'othree/html5.vim'
 Plugin 'othree/yajs.vim',
 Plugin 'othree/es.next.syntax.vim'
+Plugin 'Yggdroot/indentLine'
+"Plugin 'mtscout6/vim-cjsx'
+Plugin 'mxw/vim-jsx'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'tpope/vim-haml'
 
 " Complte
 Plugin 'marijnh/tern_for_vim'
-"Plugin 'othree/tern_for_vim_coffee'
 Plugin 'L9'
-Plugin 'othree/vim-autocomplpop'
-"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'vim-scripts/AutoComplPop'
+"Plugin 'othree/vim-autocomplpop'
+Plugin 'Valloric/YouCompleteMe'
 
 
 Plugin 'MarcWeber/vim-addon-mw-utils.git'
 Plugin 'MarcWeber/vim-addon-local-vimrc'
 Plugin 'tomtom/tlib_vim.git'
 Plugin 'honza/vim-snippets'
-Plugin 'garbas/vim-snipmate'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'justinj/vim-react-snippets'
+Plugin 'garbas/vim-snipmate'          " <tab>
+Plugin 'airblade/vim-gitgutter'       " GitGutterToggle
+Plugin 'git@github.com:Hwrdy/vim-react-snippets-es6.git'
 
 
 
 " Style
-Plugin 'hail2u/vim-css3-syntax'
 Plugin 'ap/vim-css-color'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'othree/csscomplete.vim'
+"Plugin 'cakebaker/scss-syntax.vim'
+"Plugin 'othree/csscomplete.vim'
 "Plugin 'juvenn/mustache.vim'
 "Plugin 'mustache/vim-mustache-handlebars'
 
-" Coffee
-"Plugin 'kchmck/vim-coffee-script'
-"Plugin 'othree/fecompressor.vim'
 
 
 " All of your Plugins must be added before the following line
@@ -173,7 +168,7 @@ let g:choosewin_overlay_enable = 1
 
 " Airline ------------------------------
 let g:airline_powerline_fonts = 0
-let g:airline_theme = 'bubblegum'
+" let g:airline_theme = 'bubblegum'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 
@@ -208,16 +203,18 @@ map <Leader><leader>. <Plug>(easymotion-repeat)
 let g:NERDSpaceDelims=1
 
 
+"region expanding
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+
+
+
 " TabMan ------------------------------
 " mappings to toggle display, and to focus on it
 let g:tabman_toggle = 'tl'
 let g:tabman_focus  = 'tf'
 
-
-" Tagbar
-let g:tagbar_width=35
-let g:tagbar_autofocus=1
-nmap <F6> :TagbarToggle<CR>
 
 " CtrlSF ----------------------------------
 nmap     <Leader>ff <Plug>CtrlSFPrompt
@@ -229,15 +226,19 @@ nnoremap <Leader>fo :CtrlSFOpen<CR>
 nnoremap <Leader>ft :CtrlSFToggle<CR>
 inoremap <Leader>ft <Esc>:CtrlSFToggle<CR>
 
-
-" Run Interactive
-nnoremap <leader>ri :RunInInteractiveShell<space>
-
+" Emmet
+let g:user_emmet_leader_key='<C-Z>'
+let g:user_emmet_mode='n'    "only enable normal mode functions.
+let g:user_emmet_mode='inv'  "enable all functions, which is equal to
+let g:user_emmet_mode='a'    "enable all function in all mode."
 
 " Autoclose ------------------------------
 " Fix to let ESC work as espected with Autoclose plugin
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
+
+" ignore node_modules for ctrlp_custom_ignore
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store|git'
 
 
 " SnipMate --------------------------------
@@ -280,6 +281,13 @@ nnoremap <silent> <F2> :NERDTree<CR>
 let NERDTreeShowBookmarks  = 0
 let g:nerdtree_tabs_focus_on_files = 1
 
+" Before copy
+nnoremap <silent> <F7> :set nu<CR> :GitGutterToggle<CR> :IndentLinesToggle<CR>
+nnoremap =<F7> :set nu<CR> :GitGutterToggle<CR> :IndentLinesToggle<CR>
+
+nnoremap <silent> <F8> :set nonu<CR> :GitGutterToggle<CR> :IndentLinesToggle<CR>
+nnoremap =<F8> :set nonu<CR> :GitGutterToggle<CR> :IndentLinesToggle<CR>
+
 " Gundo --------
 nnoremap <F10> :GundoToggle<CR>
 
@@ -289,10 +297,10 @@ nnoremap =<F12> :set nopaste<CR>
 
 
 " Coffee
-autocmd FileType coffee set ts=2 sw=2 sts=2
+" autocmd FileType coffee set ts=2 sw=2 sts=2
 
 " CSS complete
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
+ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
 
 " Activate scss.vim
 au BufRead,BufNewFile *.scss set filetype=scss
@@ -301,10 +309,10 @@ au! BufWrite * mark ' | silent! %s/\s\+$// | norm ''
 " Replace tab to spaces.
 au BufWrite * :retab
 " Set auto commands.
-autocmd BufReadPost *
-\ if line("'\"") > 0 && line ("'\"") <= line("$") |
-\   exe "normal g'\"" |
-\ endif
+ autocmd BufReadPost *
+ \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+ \   exe "normal g'\"" |
+ \ endif
 
 
 " Special File Types
@@ -329,47 +337,29 @@ vmap <Leader>p "+p
 vmap <Leader>P "+P
 nmap <Leader><Leader> V
 
-
-"III. Use region expanding
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-
-
-
 function! Replace(confirm, wholeword, replace)
-  wa
-  let flag = ''
-  if a:confirm
-    let flag .= 'gec'
-  else
-    let flag .= 'ge'
-  endif
-  let search = ''
-  if a:wholeword
-    let search .= '\<' . escape(expand('<cword>'), '/\.*$^~[') . '\>'
-  else
-    let search .= expand('<cword>')
-  endif
-  let replace = escape(a:replace, '/\&~')
-  execute 'argdo %s/' . search . '/' . replace . '/' . flag . '| update'
+    wa
+    let flag = ''
+    if a:confirm
+        let flag .= 'gec'
+    else
+        let flag .= 'ge'
+    endif
+    let search = ''
+    if a:wholeword
+        let search .= '\<' . escape(expand('<cword>'), '/\.*$^~[') . '\>'
+    else
+        let search .= expand('<cword>')
+    endif
+    let replace = escape(a:replace, '/\&~')
+    execute '%s/' . search . '/' . replace . '/' . flag. '| update'
 endfunction
 
-" without confirm, incomplete
 nnoremap <Leader>R :call Replace(0, 0, input('Replace '.expand('<cword>').' with: '))<CR>
-" without confirm, complete
-" nnoremap <Leader>rw :call Replace(0, 1, input('Replace '.expand('<cword>').' with: '))<CR>
-" confirm, incomplete
-" nnoremap <Leader>rc :call Replace(1, 0, input('Replace '.expand('<cword>').' with: '))<CR>
-" confirm, complete
-nnoremap <Leader>rw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
-
-
-
-
-
-
-
-
-
-
-
+" whole
+nnoremap <Leader>rw :call Replace(0, 1, input('Replace '.expand('<cword>').' with: '))<CR>
+" confirm
+nnoremap <Leader>rc :call Replace(1, 0, input('Replace '.expand('<cword>').' with: '))<CR>
+" confirm and whole
+nnoremap <Leader>rcw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
+nnoremap <Leader>rwc :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
