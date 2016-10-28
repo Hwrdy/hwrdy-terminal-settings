@@ -1,0 +1,22 @@
+[user]
+  name = hwrdy
+  email = howard.chyeh@gmail.com
+[user "merge"]
+  tool = vimdiff
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  profilecnyes = !git config user.email \"howardy@cnyes.com\" && git config user.name \"howardy\"
+  profilehwrdy = !git config user.email \"howard.chyeh@gmail.com\" && git config user.name \"hwrdy\"
+  amend = !git commit --amend
+  sreset = !git reset HEAD^
+  hreset = !git reset –hard HEAD^
+[push]
+  default = simple
+[core]
+  editor = nvim
+[pager]
+  diff = diff-so-fancy | less --tabs=4 -RFX
+  show = diff-so-fancy | less --tabs=4 -RFX
