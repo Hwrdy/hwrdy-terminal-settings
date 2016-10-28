@@ -1,79 +1,68 @@
 " Hwrdy's vimrc
 
-" no vi-compatible
-set nocompatible
-
-filetype off
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
-
-" let Vundle manage Vundle
-Plugin 'gmarik/vundle'
+call plug#begin('~/.vim/plugged')
 
 " Vim environment
-Plugin 'bling/vim-airline'
-Plugin 'fisadev/fisa-vim-colorscheme' " Terminal Vim with 256 colors colorscheme
+Plug 'bling/vim-airline'
+Plug 'fisadev/fisa-vim-colorscheme' " Terminal Vim with 256 colors colorscheme
 
 " Tool
-"Plugin 'terryma/vim-multiple-cursors' " <C-n>
-Plugin 'junegunn/vim-easy-align'      " gaip, vipga
-Plugin 'Lokaltog/vim-easymotion'      " ,, hjkl
-Plugin 'vim-scripts/matchit.zip'      " % jump to corresponding ] }
-Plugin 'scrooloose/nerdcommenter'     " ,cc ,cm ,cu ,space
-Plugin 'scrooloose/nerdtree'          " F10
-"Plugin 'kshenoy/vim-signature'        " m[a-z]:mark, '[z-z]:jump
-Plugin 'kien/ctrlp.vim'               " <C-p>
-Plugin 'fisadev/vim-ctrlp-cmdpalette'
-Plugin 'terryma/vim-expand-region'    " v,V
-"Plugin 'kien/tabman.vim'              " tablist panel , leader mt/mf
-Plugin 'Townk/vim-autoclose'          " Auto close
-Plugin 't9md/vim-choosewin'           " Windows chooser, ``
-Plugin 'sjl/gundo.vim'                " undo list  F10
-"Plugin 'dyng/ctrlsf.vim'              " ctrl shift find
-"Plugin 'mattn/emmet-vim'              " <C-z>,
+"Plug 'terryma/vim-multiple-cursors' " <C-n>
+Plug 'junegunn/vim-easy-align'      " gaip, vipga
+Plug 'Lokaltog/vim-easymotion'      " ,, hjkl
+Plug 'vim-scripts/matchit.zip'      " % jump to corresponding ] }
+Plug 'scrooloose/nerdcommenter'     " ,cc ,cm ,cu ,space
+Plug 'scrooloose/nerdtree'          " F10
+"Plug 'kshenoy/vim-signature'        " m[a-z]:mark, '[z-z]:jump
+Plug 'kien/ctrlp.vim'               " <C-p>
+Plug 'fisadev/vim-ctrlp-cmdpalette'
+Plug 'terryma/vim-expand-region'    " v,V
+"Plug 'kien/tabman.vim'              " tablist panel , leader mt/mf
+Plug 'Townk/vim-autoclose'          " Auto close
+Plug 't9md/vim-choosewin'           " Windows chooser, ``
+"Plug 'sjl/gundo.vim'                " undo list  F10
+"Plug 'dyng/ctrlsf.vim'              " ctrl shift find
+"Plug 'mattn/emmet-vim'              " <C-z>,
 
 " syntax helper
-"Plugin 'othree/html5.vim'
-Plugin 'othree/yajs.vim',
-Plugin 'othree/es.next.syntax.vim'
-Plugin 'Yggdroot/indentLine'
-"Plugin 'mtscout6/vim-cjsx'
-Plugin 'mxw/vim-jsx'
-"Plugin 'pangloss/vim-javascript'
-"Plugin 'tpope/vim-haml'
+Plug 'othree/html5.vim'
+Plug 'othree/xml.vim'
+Plug 'Yggdroot/indentLine'
+"Plug 'mtscout6/vim-cjsx'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'othree/yajs.vim',
+Plug 'othree/es.next.syntax.vim'
+"Plug 'tpope/vim-haml'
+Plug 'valloric/MatchTagAlways'
 
 " Complte
-Plugin 'marijnh/tern_for_vim'
-Plugin 'L9'
-"Plugin 'vim-scripts/AutoComplPop'
-"Plugin 'othree/vim-autocomplpop'
-Plugin 'Valloric/YouCompleteMe'
+Plug 'marijnh/tern_for_vim'
+Plug 'L9'
+Plug 'vim-scripts/AutoComplPop'
+"Plug 'othree/vim-autocomplpop'
+"Plug 'Valloric/YouCompleteMe'
 
 
-Plugin 'MarcWeber/vim-addon-mw-utils.git'
-Plugin 'MarcWeber/vim-addon-local-vimrc'
-Plugin 'tomtom/tlib_vim.git'
-Plugin 'honza/vim-snippets'
-Plugin 'garbas/vim-snipmate'          " <tab>
-Plugin 'airblade/vim-gitgutter'       " GitGutterToggle
-Plugin 'git@github.com:Hwrdy/vim-react-snippets-es6.git'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'MarcWeber/vim-addon-local-vimrc'
+Plug 'tomtom/tlib_vim'
+Plug 'honza/vim-snippets'
+Plug 'garbas/vim-snipmate'          " <tab>
+Plug 'airblade/vim-gitgutter'       " GitGutterToggle
+Plug 'git@github.com:Hwrdy/vim-react-snippets-es6.git'
 
 
 
 " Style
-Plugin 'ap/vim-css-color'
-"Plugin 'cakebaker/scss-syntax.vim'
-"Plugin 'othree/csscomplete.vim'
-"Plugin 'juvenn/mustache.vim'
-"Plugin 'mustache/vim-mustache-handlebars'
+Plug 'wombat256.vim'
+Plug 'ap/vim-css-color'
+"Plug 'cakebaker/scss-syntax.vim'
+"Plug 'othree/csscomplete.vim'
+"Plug 'juvenn/mustache.vim'
+"Plug 'mustache/vim-mustache-handlebars'
 
-
-
-" All of your Plugins must be added before the following line
-call vundle#end()               " required
-filetype plugin indent on       " required
-
+call plug#end()
 
 
 syntax on
@@ -208,6 +197,18 @@ vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 
+" vim-jsx
+let g:jsx_ext_required = 0
+
+
+" MatchTagAlways
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'javascript.jsx' : 1,
+    \}
 
 
 " TabMan ------------------------------
@@ -253,7 +254,7 @@ au BufNewFile *.es6 set ft=javascript.html
 
 "Indent Guide ----------------------------
 let g:indentLine_color_term = 239
-
+let g:indentLine_faster = 1
 
 "" keypad
 "" http://vim.wikia.com/wiki/PuTTY_numeric_keypad_mappings
@@ -320,6 +321,7 @@ au BufRead,BufNewFile *.less set ft=less
 au BufRead,BufNewFile *.tpl set ft=html
 au BufRead,BufNewFile *.xsl set ft=html
 au BufRead,BufNewFile *.json set ft=javascript
+au BufRead,BufNewFile *.js set ft=javascript.jsx
 au BufRead,BufNewFile *.hbs set syntax=handlebars
 au BufRead,BufNewFile *.n3  set ft=n3
 au BufRead,BufNewFile /usr/local/etc/nginx/* set ft=nginx
