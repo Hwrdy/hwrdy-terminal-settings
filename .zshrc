@@ -1,14 +1,27 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/hwrdy/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="candy"
+
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -45,14 +58,17 @@ ZSH_THEME="candy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+)
+
+export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 # export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -68,7 +84,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -82,13 +98,18 @@ alias vn=nvim
 alias nv=nvim
 alias vim=nvim
 
-export NVM_DIR="/Users/hwrdy/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 nvm alias default stable
 nvm use default
 
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
 
-export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/hwrdy/Documents/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/hwrdy/Documents/google-cloud-sdk/path.zsh.inc'; fi
 
-export PATH=${PATH}:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools
-export ANDROID_HOME=$HOME/Library/Android/sdk
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/hwrdy/Documents/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/hwrdy/Documents/google-cloud-sdk/completion.zsh.inc'; fi
