@@ -1,6 +1,6 @@
 [user]
   name = hwrdy
-  email = howard.chyeh@gmail.com
+  email = howard.yeh@gmail.com
 [user "merge"]
   tool = vimdiff
 [alias]
@@ -8,11 +8,14 @@
   ci = commit
   st = status
   br = branch
-  profilecnyes = !git config user.email \"howardy@cnyes.com\" && git config user.name \"howardy\"
+  cp = cherry-pick
   profilehwrdy = !git config user.email \"howard.chyeh@gmail.com\" && git config user.name \"hwrdy\"
   amend = !git commit --amend
   sreset = !git reset HEAD^
   hreset = !git reset –hard HEAD^
+  pruned = !git fetch origin --prune
+  dbg = !git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -d
+  db = !git branch -D
 [push]
   default = simple
 [core]
@@ -20,3 +23,5 @@
 [pager]
   diff = diff-so-fancy | less --tabs=4 -RFX
   show = diff-so-fancy | less --tabs=4 -RFX
+[url "git@github.com:"]
+  insteadOf = https://github.com/
