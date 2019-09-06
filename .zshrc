@@ -94,22 +94,42 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vn=nvim
-alias nv=nvim
-alias vim=nvim
+# alias vn=nvim
+# alias nv=nvim
+# alias vim=nvim
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-nvm alias default stable
-nvm use default
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+alias pg-start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+export APP=odhk
+export SERVICE=customer
+alias od-activate="pyenv activate oddynamo"
+alias od-deactivate="pyenv deactivate oddynamo"
+alias od-start="python run.py"
+
+# nvm alias default stable
+nvm use v11.14.0
+cd Gitrepos
+
+# export GOPATH="$HOME/go"
+# export PATH="$GOPATH/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/hwrdy/Documents/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/hwrdy/Documents/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/hwrdy/Documents/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/hwrdy/Documents/google-cloud-sdk/completion.zsh.inc'; fi
+

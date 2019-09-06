@@ -38,7 +38,7 @@ Plug 'valloric/MatchTagAlways'
 
 " Complte
 Plug 'marijnh/tern_for_vim'
-Plug 'L9'
+Plug 'vim-scripts/L9'
 Plug 'vim-scripts/AutoComplPop'
 "Plug 'othree/vim-autocomplpop'
 "Plug 'Valloric/YouCompleteMe'
@@ -55,7 +55,7 @@ Plug 'git@github.com:Hwrdy/vim-react-snippets-es6.git'
 
 
 " Style
-Plug 'wombat256.vim'
+Plug 'vim-scripts/wombat256.vim'
 Plug 'ap/vim-css-color'
 "Plug 'cakebaker/scss-syntax.vim'
 "Plug 'othree/csscomplete.vim'
